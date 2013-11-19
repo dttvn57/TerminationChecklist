@@ -1,0 +1,188 @@
+﻿@model TerminationChecklist.Models.Checklist
+@{
+    Layout = "";
+
+}
+<table style="border:0 none; border-collapse:separate; width:100%; table-layout: fixed;">
+    <colgroup>
+        @for (var i = 0; i < 10; i++)
+        {
+            <col style="width:10%;" />
+        }       
+    </colgroup>
+
+    @*
+    <tr>
+        <td style="background-color:yellow">1</td>
+        <td style="background-color:red">2</td>
+        <td style="background-color:yellow">3</td>
+        <td style="background-color:red">4</td>
+        <td style="background-color:yellow">5</td>
+        <td style="background-color:red">6</td>
+        <td style="background-color:yellow">7</td>
+        <td style="background-color:red">8</td>
+        <td style="background-color:yellow">9</td>
+        <td style="background-color:red">10</td>
+    </tr>
+    *@
+
+    <td colspan="10" style="text-align:center"><h1><b>Supervisor’s CheckList For Employee Termination</b></h1></td>
+    <tr><td><br/></td></tr>
+
+    <tr>
+        <td colspan="4"></td>
+        <th colspan="3" style="text-align: right;">Date Personnel Notified&nbsp; &nbsp;</th>
+        <td colspan="2">
+            @Html.LabelForModel(Model.date_personnel_notified.Value.ToString("dd/MM/yyyy"))
+        </td>
+    </tr>
+
+    <tr>
+        <th colspan="2" style="text-align: right;">Employee Name&nbsp; &nbsp;</th>
+        <td colspan="3">@Html.LabelForModel(Model.Name)</td>
+
+
+        <th colspan="2" style="text-align: right;">Location&nbsp; &nbsp;</th>
+        <td colspan="3">@Html.LabelForModel(Model.location)</td>  
+    </tr>
+
+
+    <tr>
+        <th colspan="2" style="text-align: right;">Last Work Day&nbsp; &nbsp;</th>
+        <td colspan="3">@Html.LabelForModel(Model.last_work_day.Value.ToString("dd/MM/yyyy"))</td>  
+
+        <th colspan="2" style="text-align: right;">Classification&nbsp; &nbsp;</th>
+        <td colspan="3">@Html.LabelForModel(Model.classification)</td>  
+    </tr>
+    <tr><td><br/></td></tr>
+
+    <!-- To Fremont Building Manager -->
+    <tr><td><br/></td></tr>
+    <tr>
+        <th colspan="10" style="text-align: left; color:white; background-color:lightblue" colspan="4">To Fremont Building Manager</th>
+    </tr>
+    <tr>
+        <th colspan="2" style="text-align: right;">Delete Security Pin Code&nbsp; &nbsp;</th>
+        @if (@Model.delete_pin_day != null)
+        {
+            <td colspan="3">@Html.LabelForModel(Model.delete_pin_day.Value.ToString("dd/MM/yyyy"))</td>    
+        }
+        else
+        {
+            <td colspan="3"></td>
+        }
+        <th colspan="2" style="text-align: right;">(Initials)&nbsp; &nbsp;</th>
+        <td colspan="3">@Html.LabelForModel(Model.initials)</td>  
+    </tr>
+
+    <tr>
+        <th colspan="2" style="text-align: right;">Specify Building Key&nbsp; &nbsp;</th>
+        <td colspan="3">@Html.LabelForModel(Model.specify_building_key)</td>  
+
+        <th colspan="2" style="text-align: right;">Locker#&nbsp; &nbsp;</th>
+        <td colspan="3">@Html.LabelForModel(Model.locker_num)</td>  
+    </tr>
+
+        <!-- To ITU Coordinator -->
+        <tr><td><br/></td></tr>
+        <tr>
+            <th colspan="10" style="text-align: left; color:white; background-color:lightblue" colspan="4">To ITU Coordinator</th>
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Notify Phone/Voice Mail Coordinator&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.LabelForModel(Model.notify_phone_coordinator)</td>  
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <th colspan="6" style="text-align: right;">Notify Network Administrator (VPN, NT Account, E-mailAccount)&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.notify_network_coordinator, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Remove User Folder&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.remove_user_folder, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Remove Infopac Password&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.remove_infopac_password, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+
+        <!-- To PURS Administrator -->
+        <tr><td><br/></td></tr>
+        <tr>
+            <th colspan="10" style="text-align: left; color:white; background-color:lightblue" colspan="4">To PURS Administrator</th>
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">HR (L.Carroll, A.Hammond, Payroll)&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.notify_hr, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Secretarial Unit (Marion)&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.secretarial_unit, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+
+        <!-- To Immediate Supervisor -->
+        <tr><td><br/></td></tr>
+        <tr>
+            <th colspan="10" style="text-align: left; color:white; background-color:lightblue" colspan="4">To Immediate Supervisor</th>
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Remove "Staff" Status from Patron Record&nbsp; &nbsp;</th>
+            <td colspan="3">@Html.CheckBoxFor(m => m.remove_staff_status, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Collect Bldg Key(s) (FRM Main: Return Keys to Bldg Mgr)&nbsp; &nbsp;</th>
+            <td colspan="3">@Html.LabelForModel(Model.collect_bldg_keys)</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Special Keys (Desk, File & Branch)&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.special_keys, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Health Plan Binder (Return to Personnel)&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.health_plan_binder_returned, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Name Badge&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.name_badge, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">County Gas Card (Send to Bldg Mgr)&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.county_gas_card, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Conflict of Interest Code Report&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.conflict_of_interest_code_report, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Return Laptop & Accesories (To ITU)&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.returned_to_itu, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">To Accounting Manager (Phone/PDA/Treo)&nbsp; &nbsp;</th>
+            <td colspan="1">@Html.CheckBoxFor(m => m.returned_to_accounting_manager, htmlAttributes: new { disabled = "disabled" })</td>  
+        </tr>
+        <tr>
+            <th colspan="7" style="text-align: right;">Special Equipment&nbsp; &nbsp;</th>
+            <td colspan="3">@Html.LabelForModel(Model.special_equipment)</td>  
+        </tr>
+
+        <!-- Supervisor Signature -->
+        <tr><td><br/></td></tr>
+        <tr>
+            <td colspan="2" style="text-align: right;">Supervisor Signature&nbsp; &nbsp;</td>
+
+            @if (@Model.supervisor_signature != null)
+            { 
+                <td colspan="5"><img src = @Model.supervisor_signature width="400" height="100"/>    </td>
+            }
+            else
+            { 
+                <td colspan="5"></td>
+            }
+            <td colspan="1" style="text-align: right;">Date&nbsp; &nbsp;</td>
+            @if (@Model.supervisor_signed_date != null)
+            { 
+                <td colspan="2" style="text-align: left;">@Html.LabelForModel(Model.supervisor_signed_date.Value.ToString("dd/MM/yyyy"))</td>    
+            }
+        </tr>
+</table>

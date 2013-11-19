@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TerminationChecklist.Models.Checklist>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Create a new form", "Create")
+</p>
+<table>
+    <colgroup>
+        <col style="width:25%;" />
+        <col style="width:20%;" />
+        <col style="width:5%;" />
+        <col style="width:45%;" />
+    <colgroup>
+
+    <tr><td></br></td></tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.date_personnel_notified)
+        </th>
+    </tr>
+    <tr>
+        <td colspan="4"><hr /></td>
+    </tr>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.date_personnel_notified)
+            </td>
+
+            <td colspan="1"></td>
+
+            <td>
+                @Html.ActionLink("Approve", "Approve", new { id=item.ID }) 
+                @*
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                *@
+            </td>
+        </tr>
+    }
+
+</table>

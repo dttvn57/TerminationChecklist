@@ -1,0 +1,80 @@
+﻿@model IEnumerable<TerminationChecklist.Models.Checklist>
+
+@if (Model == null)
+{ 
+    <h2 style="color:red">You're not authorized!</h2>
+}
+else
+{
+    bool isManager = false;
+    if (TempData["ISMANAGER"] != null)
+    {
+        isManager = TempData["ISMANAGER"] == "yes" ? true : false;
+    }
+
+    <table style="border: 0 none;">
+        <colgroup>
+            <col style="width:15%;"/>
+            <col style="width:15%;"/>
+            <col style="width:15%;"/>
+            <col style="width:15%;"/>
+            <col style="width:40%;"/>
+        </colgroup>
+
+        <tr><td><br /></td></tr>
+        <tr><hr></tr>
+
+        <tr>
+            <th>Employee</th>
+            <th>Last Work Day</th>
+            <th>Date Personnel Notified</th>
+            <th>Signed Date</th>
+        </tr>
+        <tr><td colspan="4"><hr /></td></tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.LabelForModel(item.Name)</td>
+                <td>@Html.LabelForModel(item.last_work_day.Value.ToString("dd/MM/yyyy"))</td>
+                <td>@Html.LabelForModel(item.date_personnel_notified.Value.ToString("dd/MM/yyyy"))</td>
+                @if (item.supervisor_signed_date != null)
+                {
+                    <td>@Html.LabelForModel(item.supervisor_signed_date.Value.ToString("dd/MM/yyyy"))</td>
+                }
+                else
+                { 
+                    <td></td>
+                }
+
+                @if (@isManager)
+                {
+                    <td> @Html.ActionLink("Approve", "Approve", "Checklist", new { id = item.ID, isManager = @isManager }, null)&nbsp; &nbsp;|&nbsp;&nbsp;
+                         @Html.ActionLink("View", "Details", "Checklist", new { id = item.ID }, null)&nbsp; &nbsp;|&nbsp;&nbsp;
+                         @Html.ActionLink("Print", "PrintForm", "Checklist", new { id = item.ID }, null)
+                        
+                    @*
+                        @Html.ActionLink("Modify", "Edit", "Checklist", new { id = item.ID, isManager = @isManager }, null)&nbsp; &nbsp;|&nbsp;&nbsp;
+                        &nbsp; &nbsp;|&nbsp;&nbsp;
+                        @Html.ActionLink("Print", "PrintForm", "RequestForm", new { Id = item.ID, fullName = item.Name }, null)
+                        *@
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("View", "Details", "Checklist", new { id = item.ID }, null)&nbsp; &nbsp;|&nbsp;&nbsp;
+                        @Html.ActionLink("Print", "PrintForm", "Checklist", new { id = item.ID }, null)
+                    
+                        @*
+                        @Html.ActionLink("Modify", "Edit", "Checklist", new { id = item.ID, isManager = @isManager }, null)&nbsp; &nbsp;|&nbsp;&nbsp;
+                        &nbsp; &nbsp;|&nbsp;&nbsp;
+                        @Html.ActionLink("Print", "PrintForm", "RequestForm", new { Id = item.ID, fullName = item.Name }, null)
+                        *@
+                    </td>
+               }
+            </tr>
+        }
+    </table>    
+}
